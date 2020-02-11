@@ -1,16 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const url = 'mongodb://mykolas:mykolas1@ds123136.mlab.com:23136/foodie';
+import { DB_URL } from 'env';
 
 exports.handler = async (event, context) => {
-    const db = await mongoose.connect(url);
+    const db = await mongoose.connect(DB_URL);
 
     db.model(
         'reviews',
         new mongoose.Schema({
             created: Date,
-            author: mongoose.Schema.ObjectId,
-            store: mongoose.Schema.ObjectId,
             text: String,
             rating: Number,
         }),
@@ -19,6 +17,8 @@ exports.handler = async (event, context) => {
     const reviewsModel = db.model('reviews');
 
     const reviews = reviewsModel.find();
+
+    console.log(reviews);
 
     return {
         statusCode: 200,
