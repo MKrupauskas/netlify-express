@@ -1,6 +1,10 @@
-<h1>Reviews</h1>
-<div data-js="list"></div>
+<h1 class="p-5 font-bold text-xl">Reviews</h1>
+<div data-js="list" class="p-5"></div>
 
+<link
+    href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+    rel="stylesheet"
+/>
 <script>
     const url =
         'https://agitated-shirley-1ff90e.netlify.com/.netlify/functions/get';
@@ -8,15 +12,13 @@
     const init = async () => {
         const response = await fetch(url);
 
-        const json = await response.json();
-
-        const data = JSON.parse(json);
+        const data = await response.json();
 
         const list = document.querySelector('[data-js="list"]');
 
         data.forEach(item => {
             list.innerHTML += `
-                <div>
+                <div class="border border-gray-400 rounded p-2">
                     <p>{item.text}</p>
                     <small>{item.rating} | {item.created}</small>
                 </div>
