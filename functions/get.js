@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-import { DB_URL } from './../env';
+const { DB_URL } = require('./../env');
 
 exports.handler = async (event, context) => {
     const db = await mongoose.connect(DB_URL);
