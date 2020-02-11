@@ -8,16 +8,15 @@ const reviewsSchema = new mongoose.Schema({
     rating: Number,
 });
 
+let db = null;
+
 exports.handler = async (event, context) => {
-    const db = await mongoose.connect(DB_URL);
-
-    let reviewsModel;
-
-    try {
-        reviewsModel = db.model('reviews');
-    } catch {
-        reviewsModel = db.model('reviews', reviewsSchema);
+    if (!db) {
+        db = await mongoose.connect(DB_URL);
+        db.model('reviews', reviewsSchema);
     }
+
+    const reviewsModel = db.model('reviews');
 
     const reviews = await reviewsModel.find().exec();
 
