@@ -1,0 +1,27 @@
+<div data-js="list"></div>
+
+<script>
+    const url =
+        'https://agitated-shirley-1ff90e.netlify.com/.netlify/functions/get';
+
+    const init = async () => {
+        const response = await fetch(url);
+
+        const json = await response.json();
+
+        const data = JSON.parse(json);
+
+        const list = document.querySelector('[data-js="list"]');
+
+        data.forEach(item => {
+            list.innerHTML += `
+                <div>
+                    <p>{item.text}</p>
+                    <small>{item.rating} | {item.created}</small>
+                </div>
+            `;
+        });
+    };
+
+    init();
+</script>
