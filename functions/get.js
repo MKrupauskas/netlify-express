@@ -2,23 +2,24 @@ const mongoose = require('mongoose');
 
 const { DB_URL } = require('./env');
 
+const reviewsSchema = new mongoose.Schema({
+    created: Date,
+    text: String,
+    rating: Number,
+});
+
 exports.handler = async (event, context) => {
     const db = await mongoose.connect(DB_URL);
 
-    db.model(
-        'reviews',
-        new mongoose.Schema({
-            created: Date,
-            text: String,
-            rating: Number,
-        }),
-    );
+    let reviewsModel;
 
-    const reviewsModel = db.model('reviews');
+    try {
+        reviewsModel = db.model('reviews');
+    } catch {
+        reviewsModel = db.model('reviews', reviewsSchema);
+    }
 
     const reviews = await reviewsModel.find().exec();
-
-    console.log(reviews);
 
     return {
         statusCode: 200,
