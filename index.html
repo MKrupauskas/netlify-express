@@ -17,10 +17,12 @@
         const list = document.querySelector('[data-js="list"]');
 
         data.forEach(item => {
+            const date = new Date(item.created).toLocaleDateString();
+
             list.innerHTML += `
-                <div class="border border-gray-400 rounded p-2">
-                    <p>{item.text}</p>
-                    <small>{item.rating} | {item.created}</small>
+                <div class="border border-gray-400 rounded p-2 mb-1">
+                    <p>${item.text}</p>
+                    <small>${item.rating} | ${date}</small>
                 </div>
             `;
         });
