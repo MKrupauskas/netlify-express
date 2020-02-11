@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
 
     const reviewsModel = db.model('reviews');
 
-    const reviews = reviewsModel.find();
+    const reviews = await reviewsModel.find().exec();
 
     console.log(reviews);
 
