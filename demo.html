@@ -9,7 +9,9 @@
     const url = 'https://serverless-talk.netlify.com/.netlify/functions/get';
 
     const init = async () => {
-        // TODO: fetch and parse json
+        const response = await fetch(url);
+
+        const data = await response.json();
 
         const list = document.querySelector('[data-js="list"]');
 
