@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/MKrupauskas/netlify-express#readme",
   "dependencies": {
-    "mongoose": "^5.8.11"
+    "mongoose": "^5.13.15"
   }
 }
